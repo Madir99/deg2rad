@@ -1,4 +1,5 @@
 #include "iostream"
+#include "libfrac.hpp"
 int main(int argv,char* args[]) {
 	if(argv > 1) {
 		int deg = 0;
@@ -7,21 +8,10 @@ int main(int argv,char* args[]) {
 			std::cout << "0" << std::endl;
 			return 0;
 		}
-		if(deg < 0) {
-			deg = deg * -1;
-			std::cout << "-";
-		}
-		int half = 180;
-		for(int i = 2; i <= deg; i++) {
-			if(((deg % i)+(half % i)) == 0) {
-				deg = deg / i;
-				half = half / i;
-				i = 1;
-			}
-		}
-		if(deg != 1) std::cout << deg ;
+		int *out = frcsimp(deg,180);
+		if(*out != 1) std::cout << *out;
 		std::cout << "π";
-		if(half != 1) std::cout << "/" << half;
+		if(*(out+1) != 1) std::cout << "/" << *(out+1);
 		std::cout << std::endl;
 	}
 	return 0;
